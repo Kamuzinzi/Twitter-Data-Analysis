@@ -122,7 +122,7 @@ class TweetDfExtractor:
         favourite_count = []
         for tweet in self.tweets_list:
             try:
-                favourite_count += [tweet['retweet_count']]
+                favourite_count += [tweet['favorite_count']]
             except TypeError:
                 favourite_count += [None]
         return favourite_count
@@ -158,7 +158,7 @@ class TweetDfExtractor:
         lang = []
         for tweet in self.tweets_list:
             try:
-                lang += [detect(tweet['full_text'])]
+                lang += [tweet['lang']]
             except:
                 lang += [""]
         
@@ -194,7 +194,6 @@ class TweetDfExtractor:
         follower_count = self.find_followers_count()
         friends_count = self.find_friends_count()
         sensitivity = self.is_sensitive()
-        print(f"sensitivity {len(sensitivity)}")
         hashtags = self.find_hashtags()
         mentions = self.find_mentions()
         location = self.find_location()
