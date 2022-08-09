@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime
 from langdetect import detect
+
 class Clean_Tweets:
     """
     The PEP8 Standard AMAZING!!!
@@ -52,6 +53,6 @@ class Clean_Tweets:
         remove non english tweets from lang
         """
         
-        df = df[detect(df['full_text'])=='en']
+        df = df[df['lan']=='en']
         
         return df
