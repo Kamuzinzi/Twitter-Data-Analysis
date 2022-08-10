@@ -3,7 +3,6 @@ from sys import exec_prefix
 from typing import Type
 import pandas as pd
 from textblob import TextBlob
-from langdetect import detect
 
 
 def read_json(json_file: str)->list:
@@ -215,6 +214,6 @@ if __name__ == "__main__":
     # _, tweet_list = read_json("data/africa_twitter_data.json")
     _, tweet_list = read_json("sample/sampletweets.json")
     tweet = TweetDfExtractor(tweet_list)
-    tweet_df = tweet.get_tweet_df(True) 
+    tweet_df = tweet.get_tweet_df() 
 
     # use all defined functions to generate a dataframe with the specified columns above
