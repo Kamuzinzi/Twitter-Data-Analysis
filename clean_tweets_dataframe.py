@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime
 from langdetect import detect
+
 class Clean_Tweets:
     """
     The PEP8 Standard AMAZING!!!
@@ -29,13 +30,9 @@ class Clean_Tweets:
         """
         convert column to datetime
         """
-        df = pd.to_datetime(df['created_at'], format='%y-%m-%d')
-
-        dtime = 'Fri Oct 09 10:01:41 +0000 2015'
-        df['created_at'] = datetime.strftime(datetime.strptime(dtime,'%a %b %d %H:%M:%S +0000 %Y'), '%Y-%m-%d %H:%M:%S')
-            
+        df['created_at'] = pd.to_datetime(df['created_at'], format='%a %b %d %H:%M:%S +0000 %Y')
         df = df[df['created_at'] >= '2020-12-31' ]
-        
+
         return df
     
     def convert_to_numbers(self, df:pd.DataFrame)->pd.DataFrame:
@@ -43,7 +40,10 @@ class Clean_Tweets:
         convert columns like polarity, subjectivity, retweet_count
         favorite_count etc to numbers
         """
-        df['polarity'] = pd.to_numeric(df['polarity'], errors='raise', downcast=None) #FIXME needs some changes
+        df['polarity'] = pd.to_numeric(df['polarity'], errors='raise', downcast=None) 
+        df['subjectivity'] = pd.to_numeric(df['subjectivity'], errors='raise', downcast=None)
+        df['retweet_count'] = pd.to_numeric(df['retweet_count'], errors='raise', downcast=None)
+        df['favorite_count'] = pd.to_numeric(df['favorite_count'], errors='raise', downcast=None)
         
         return df
     
@@ -52,6 +52,6 @@ class Clean_Tweets:
         remove non english tweets from lang
         """
         
-        df = df[detect(df['full_text'])=='en']
+        df = df[df['lang']=='en']
         
         return df
