@@ -1,6 +1,4 @@
 import json
-from sys import exec_prefix
-from typing import Type
 import pandas as pd
 from textblob import TextBlob
 
@@ -207,13 +205,9 @@ class TweetDfExtractor:
 
                 
 if __name__ == "__main__":
-    # required column to be generated you should be creative and add more features
-    columns = ['created_at', 'source', 'original_text','clean_text', 'sentiment','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
-    'original_author', 'screen_count', 'followers_count','friends_count','possibly_sensitive', 'hashtags', 'user_mentions', 'place', 'place_coord_boundaries']
-    # _, tweet_list = read_json("../covid19.json")
-    _, tweet_list = read_json("data/africa_twitter_data.json")
-    # _, tweet_list = read_json("sample/sampletweets.json")
+    import sys
+    json_path = sys.argv[1] if len(sys.argv) > 1 else "sample/sampletweets.json"
+    _, tweet_list = read_json(json_path)
     tweet = TweetDfExtractor(tweet_list)
-    tweet_df = tweet.get_tweet_df(True) 
-
-    # use all defined functions to generate a dataframe with the specified columns above
+    df = tweet.get_tweet_df(save=True)
+    print(f"Extracted {len(df)} tweets.")

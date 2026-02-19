@@ -1,8 +1,10 @@
 import unittest
 import pandas as pd
-import sys, os
+import sys
+import os
 
-sys.path.append(os.path.abspath(os.path.join("../Twitter-Data-Analysis/")))
+# Add project root to path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from extract_dataframe import read_json
 from extract_dataframe import TweetDfExtractor
